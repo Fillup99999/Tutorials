@@ -115,6 +115,21 @@ If it is successful you should be able to access it from your browser at the dom
 	TO SHUTDOWN:
 	`sudo docker compose down`
 
+
+
+
+
+If Docker Breaks (Illegal Instruction Error): Reinstall with an old version
+`apt-cache madison docker-ce | awk '{ print $3 }'`
+
+copy an old version (5:23.0.6-1~raspbian.11~bullseye in my case)
+
+`sudo apt remove docker-ce docker-ce-cli && sudo apt install docker-ce=5:23.0.6-1~raspbian.11~bullseye docker-ce-cli=5:23.0.6-1~raspbian.11~bullseye containerd.io docker-buildx-plugin docker-compose-plugin`
+
+`sudo systemctl start docker`
+
+`sudo systemctl status docker`
+
 --------------------------------------------
 RESOURCES:
 Follow the github installation and set up for Vault Warden and Docker through the respective pages.
@@ -125,8 +140,6 @@ https://github.com/dani-garcia/vaultwarden/wiki/Using-Docker-Compose
 https://github.com/caddy-dns/duckdns
 
 https://www.duckdns.org/
-
-Route the duckdns subdomain to a private IP address and verify the DNS with the provided token.
 
 **Youtube Video gets you like 99% of the way: https://youtu.be/0Ri3GVDc4pM?si=r-EAolawLLs32EKU
 ~~~
