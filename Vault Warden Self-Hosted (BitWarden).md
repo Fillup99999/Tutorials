@@ -122,13 +122,27 @@ If it is successful you should be able to access it from your browser at the dom
 If Docker Breaks (Illegal Instruction Error): Reinstall with an old version
 `apt-cache madison docker-ce | awk '{ print $3 }'`
 
+find what the old version was from /var/log/apt or just pick one
 copy an old version (5:23.0.6-1~raspbian.11~bullseye in my case)
 
 `sudo apt remove docker-ce docker-ce-cli && sudo apt install docker-ce=5:23.0.6-1~raspbian.11~bullseye docker-ce-cli=5:23.0.6-1~raspbian.11~bullseye containerd.io docker-buildx-plugin docker-compose-plugin`
+or
+`sudo apt remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y && sudo apt install docker-ce=5:24.0.7-1~raspbian.11~bullseye docker-ce-cli=5:24.0.7-1~raspbian.11~bullseye containerd.io=1.6.27-1 docker-buildx-plugin=0.11.2-1~raspbian.11~bullseye docker-compose-plugin=2.21.0-1~raspbian.11~bullseye -y`
+
 
 `sudo systemctl start docker`
 
 `sudo systemctl status docker`
+
+Then set a "Hold" on future updates for those packages until you feel that the issue is fixed:
+`sudo apt-mark hold docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
+
+`sudo apt-mark showhold`
+
+Un-Hold with:
+`sudo apt-mark unhold docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
+
+Submit a bug report to Docker
 
 --------------------------------------------
 RESOURCES:
